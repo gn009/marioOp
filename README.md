@@ -7,9 +7,9 @@
 
 [![Contribution Open](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/gn009/mariobaby/blob/main/CONTRIBUTING.md)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/gn009/mariobaby/issues)
-[![GitHub issues by-label](https://img.shields.io/github/issues/gn009/mariobaby/good%20first%20issue.svg)](https://github.com/gn009/mariobaby/labels/good%20first%20issue)
+<!-- [![GitHub issues by-label](https://img.shields.io/github/issues/gn009/mariobaby/good%20first%20issue.svg)](https://github.com/gn009/mariobaby/labels/good%20first%20issue)
 [![GitHub issues by-label](https://img.shields.io/github/issues-pr-closed-raw/gn009/mariobaby.svg)](https://github.com/gn009/mariobaby/pulls?q=is%3Apr+is%3Aclosed)
-[![GitHub issues by-label](https://img.shields.io/github/issues-pr/gn009/mariobaby.svg)](https://github.com/gn009/mariobaby/pulls?q=is%3Aopen+is%3Apr)
+[![GitHub issues by-label](https://img.shields.io/github/issues-pr/gn009/mariobaby.svg)](https://github.com/gn009/mariobaby/pulls?q=is%3Aopen+is%3Apr) -->
 
 
 <h2> 🥞 Tech Stack</h2>
