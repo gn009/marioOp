@@ -131,4 +131,4 @@ git push -u origin <your_branch_name>
 
 # Happy Contributing
 
-<img src="eatsleepcode.gif" width="250"/>
+<img src="https://github.com/gn009/hack/blob/main/eatsleepcode.gif" width="250"/>
