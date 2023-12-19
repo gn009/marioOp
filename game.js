@@ -113,9 +113,10 @@ scene("game", ({ level, score }) => {
     // added new levelCfg
     'm': [sprite('super-mushroom'), solid(), 'super-mushroom', body()],
     'g': [sprite('goomba'), 'enemy', body()],
+    'h': [sprite('block'), solid(), 'hidden'],
     
   };
-
+  //  function to handle power-up collection
   function handlePowerUp(player, powerUp) {
     destroy(powerUp);
     CURRENT_JUMP_FORCE = BIG_JUMP_FORCE;
@@ -126,6 +127,7 @@ scene("game", ({ level, score }) => {
   
   collides('mario', 'super-mushroom', handlePowerUp);
   
+  // Simple enemy behavior for the Goomba:
   action('enemy', (e) => {
     e.move(ENEMY_SPEED, 0);
   });
@@ -137,3 +139,11 @@ scene("game", ({ level, score }) => {
   collides('mario', 'enemy', () => {
     go('lose', { score: score.value });
   });
+
+  // Function to handle hidden block collisions
+function handleHiddenBlock(player, hiddenBlock) {
+  destroy(hiddenBlock);
+  // You can add some bonus here or trigger other events
+}
+
+collides('mario', 'hidden', handleHiddenBlock);
