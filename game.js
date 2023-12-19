@@ -70,6 +70,27 @@ scene("game", ({ level, score }) => {
     ]
   ]
 
+  const timerLabel = add([
+    text("Time: 120"),
+    pos(12, 12),
+    layer("ui"),
+    {
+      time: 120,
+    },
+  ]);
+  // Decrease timer every second
+  const timerAction = action(() => {
+    timerLabel.time -= dt();
+    timerLabel.text = `Time: ${Math.ceil(timerLabel.time)}`;
+
+    if (timerLabel.time <= 0) {
+      go("lose", { score: score.value });
+    }
+  });
+
+  scene.action(timerAction);
+});
+
   const levelCfg = {
     width: 20,
     height: 20,
@@ -116,4 +137,3 @@ scene("game", ({ level, score }) => {
   collides('mario', 'enemy', () => {
     go('lose', { score: score.value });
   });
-})
