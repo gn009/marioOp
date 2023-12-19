@@ -35,6 +35,10 @@ loadSprite('blue-brick', '3e5YRQd.png')
 loadSprite('blue-steel', 'gqVoI2b.png')
 loadSprite('blue-evil-shroom', 'SvV4ueD.png')
 loadSprite('blue-surprise', 'RMqCc1G.png')
+// Added new sprites
+loadSprite('super-mushroom', 'superMushroom.png');
+loadSprite('goomba', 'goomba.png');
+
 
 scene("game", ({ level, score }) => {
   layers(['bg', 'obj', 'ui'], 'obj')
@@ -66,6 +70,27 @@ scene("game", ({ level, score }) => {
     ]
   ]
 
+  const timerLabel = add([
+    text("Time: 120"),
+    pos(12, 12),
+    layer("ui"),
+    {
+      time: 120,
+    },
+  ]);
+  // Decrease timer every second
+  const timerAction = action(() => {
+    timerLabel.time -= dt();
+    timerLabel.text = `Time: ${Math.ceil(timerLabel.time)}`;
+
+    if (timerLabel.time <= 0) {
+      go("lose", { score: score.value });
+    }
+  });
+
+  scene.action(timerAction);
+});
+
   const levelCfg = {
     width: 20,
     height: 20,
@@ -84,5 +109,41 @@ scene("game", ({ level, score }) => {
     '£': [sprite('blue-brick'), solid(), scale(0.5)],
     'z': [sprite('blue-evil-shroom'), solid(), scale(0.5), 'dangerous'],
     '@': [sprite('blue-surprise'), solid(), scale(0.5), 'coin-surprise'],
-    'x': [sprite('blue-steel'), solid(), scale(0.5)],
+    'x': [sprite('blue-steel'), solid(), scale(0.5)], 
+    // added new levelCfg
+    'm': [sprite('super-mushroom'), solid(), 'super-mushroom', body()],
+    'g': [sprite('goomba'), 'enemy', body()],
+    'h': [sprite('block'), solid(), 'hidden'],
+    
+  };
+  //  function to handle power-up collection
+  function handlePowerUp(player, powerUp) {
+    destroy(powerUp);
+    CURRENT_JUMP_FORCE = BIG_JUMP_FORCE;
+    timer(20, () => {
+      CURRENT_JUMP_FORCE = JUMP_FORCE;
+    });
   }
+  
+  collides('mario', 'super-mushroom', handlePowerUp);
+  
+  // Simple enemy behavior for the Goomba:
+  action('enemy', (e) => {
+    e.move(ENEMY_SPEED, 0);
+  });
+  
+  collides('enemy', 'dangerous', (e) => {
+    destroy(e);
+  });
+  
+  collides('mario', 'enemy', () => {
+    go('lose', { score: score.value });
+  });
+
+  // Function to handle hidden block collisions
+function handleHiddenBlock(player, hiddenBlock) {
+  destroy(hiddenBlock);
+  // You can add some bonus here or trigger other events
+}
+
+collides('mario', 'hidden', handleHiddenBlock);
